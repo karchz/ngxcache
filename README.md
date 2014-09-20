@@ -1,4 +1,4 @@
-# Ngix Cache Controller for Laravel 4
+# Nginx Cache Controller for Laravel 4
 
 
 
