@@ -26,7 +26,7 @@ Ngxcache also ships with a facade which provides the static syntax for creating 
 
 	'aliases' => array(
 
-		'Basset' => 'Geeksdev\Ngxcache\Facades\Ngxcache'
+		'Ngxcache' => 'Geeksdev\Ngxcache\Facades\Ngxcache'
 
 	)
 
