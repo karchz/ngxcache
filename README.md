@@ -1,6 +1,6 @@
 # Nginx Cache Controller for Laravel 4
 
-
+[日本語ドキュメントはコチラ](http://www.geeks-dev.com/laravel%E3%81%A7nginx%E3%81%AE%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%82%92%E5%88%B6%E5%BE%A1%E3%81%99%E3%82%8Bngxcache/)
 
 ## Installation
 
