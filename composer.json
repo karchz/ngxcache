@@ -1,0 +1,23 @@
+{
+    "name": "geeks-dev/ngxcache",
+    "description": "",
+    "authors": [
+        {
+            "name": "geeks-dev",
+            "email": "vendor@geeks-dev.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Geeksdev\\Ngxcache\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
