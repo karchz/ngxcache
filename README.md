@@ -4,11 +4,11 @@
 
 ## Installation
 
-Add `geeks-dev/ngxccache` as a requirement to composer.json.
+Add `geeks-dev/ngxcache` as a requirement to composer.json.
 
 	{
 		"require": {
-			"geeks-dev/ngxccache": "dev-master"
+			"geeks-dev/ngxcache": "dev-master"
 		}
 	}
 
