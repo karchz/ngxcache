@@ -146,20 +146,22 @@ Usually are not cached .  You can select the page to be cached by that, as shown
 	 * @param  bool    $searchmode
 	 * @return result
 	 */
-	Nginx::purge($uri,true);
+	Nginx::purge($uri,$searchmode=false)
 	(It does not purge is performed only search Search Mode)
 
 	/**
 	 * Rebuild Nginx cache.
-	 * example:[Ngxcache::rebuild($uri,true);]
+	 * example:[Ngxcache::rebuild($uri,true,false);]
 	 *
 	 * @param  string  $uri
-	 * @param  bool    $overwrite
+	 * @param  string  $overwrite
+	 * @param  string  $usecurl
 	 * @return result
 	 */
-	Nginx::rebuild($uri,true);
+	Nginx::rebuild($uri,$overwrite=false,$usecurl=false)
 	(Second argument will do the forcibly overwritten.
-	 　　Only if the cache does not exist , the cache is created normally.)
+	 　　Only if the cache does not exist , the cache is created normally.
+	 	Third argument is curl or file_get_contents)
 
 	/**
 	 * Backtrace uri from Nginx cache.

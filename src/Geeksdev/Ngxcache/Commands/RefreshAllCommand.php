@@ -38,7 +38,7 @@ class RefreshAllCommand extends Command {
 					$this->info('cached. => '.$current); 
 					$rebuild = \Ngxcache::rebuild($current,true);
 					if($rebuild->success){
-							$this->info($key.'. '.$rebuild->cache);
+						$this->info($key.'. '.$rebuild->cache);
 					}else{
 						$this->error('Writing error.');
 					}

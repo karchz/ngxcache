@@ -199,18 +199,27 @@ class Ngxcache
 	 * Rebuild Nginx cache.
 	 *
 	 * @param  string  $uri
+	 * @param  string  $overwrite
+	 * @param  string  $usecurl
 	 * @return result
 	 */
-	public function rebuild($uri,$overwrite=false)
+	public function rebuild($uri,$overwrite=false,$usecurl=false)
 	{
 		$result = new \stdClass();
 		
 		$config = $this->getconfig();
-		$info = $this->purge($uri,$overwrite);
+		if($config->debug){
+			$overwrite = false;
+		}
+		$info = $this->purge($uri,!$overwrite);
 
-		if((!$info->success || ($overwrite && $info->success)) && !$config->debug){
+		if(!$info->success || ($info->success && $overwrite)){
 
-			$content = file_get_contents($uri);
+			if($usecurl){
+				$this->curl_get_contents($uri);
+			}else{
+				file_get_contents($uri);
+			}
 
 			$result = $this->purge($uri,true);
 			if($result->success){
@@ -247,5 +256,16 @@ class Ngxcache
 		}
 
 		return $uri;
+	}
+
+	private function curl_get_contents($url){
+		$ch = curl_init();
+		curl_setopt( $ch, CURLOPT_URL, $url );
+		curl_setopt( $ch, CURLOPT_HEADER, false );
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+		curl_setopt( $ch, CURLOPT_TIMEOUT,60 );
+		$result = curl_exec( $ch );
+		curl_close( $ch );
+		return $result;
 	}
 }
