@@ -128,7 +128,7 @@ Usually are not cached .  You can select the page to be cached by that, as shown
 	 *
 	 * @return result
 	 */
-	Nginx::items();
+	Ngxcache::items();
 
 	/**
 	 * Purge nginx cache of all.
@@ -136,7 +136,7 @@ Usually are not cached .  You can select the page to be cached by that, as shown
 	 *
 	 * @return result
 	 */
-	Nginx::purgeall();
+	Ngxcache::purgeall();
 	
 	/**
 	 * Purge or search Nginx cache.
@@ -146,7 +146,7 @@ Usually are not cached .  You can select the page to be cached by that, as shown
 	 * @param  bool    $searchmode
 	 * @return result
 	 */
-	Nginx::purge($uri,$searchmode=false)
+	Ngxcache::purge($uri,$searchmode=false)
 	(It does not purge is performed only search Search Mode)
 
 	/**
@@ -158,7 +158,7 @@ Usually are not cached .  You can select the page to be cached by that, as shown
 	 * @param  string  $usecurl
 	 * @return result
 	 */
-	Nginx::rebuild($uri,$overwrite=false,$usecurl=false)
+	Ngxcache::rebuild($uri,$overwrite=false,$usecurl=false)
 	(Second argument will do the forcibly overwritten.
 	 　　Only if the cache does not exist , the cache is created normally.
 	 	Third argument is curl or file_get_contents)
@@ -170,7 +170,7 @@ Usually are not cached .  You can select the page to be cached by that, as shown
 	 * @param  string  $cachePath
 	 * @return string  $uri
 	 */
-	Nginx::backtrace($cachePath);
+	Ngxcache::backtrace($cachePath);
 
 
 ## Trouble shooting
