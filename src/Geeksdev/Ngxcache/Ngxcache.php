@@ -230,8 +230,10 @@ class Ngxcache
 
 			if(file_exists($info->cache)){
 				$result->status = 'cached';
+				$result->success = true;
 			}else{
 				$result->status = 'notfound';
+				$result->success = false;
 			}
 
 		}else{
