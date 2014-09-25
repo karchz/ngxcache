@@ -81,12 +81,13 @@ Please specify the directory where the cache of the proxy or FastCGI is stored
 
 ## Ngixcache Commands
 
+	ngxcache:backtrace          Nginx display URL by tracing back all caches. <= 2014/09/25 NEW
 	ngxcache:purge <URI>        Nginx purge single cache. (URL argument is required.)
 	ngxcache:purge-all          Nginx purge cache of all.
 	ngxcache:rebuild <URI>      Nginx cache rebuild. (URL argument is required.)
 	ngxcache:refresh-all        Nginx refresh and build cache of all.
 	ngxcache:search <URI>       Nginx search single cache. (URL argument is required.)
-	ngxcache:show               Nginx show cache of all.
+	ngxcache:show               Nginx display cache of all.
 
 
 ## Make Ngixcache Filters
@@ -154,11 +155,11 @@ Usually are not cached .  You can select the page to be cached by that, as shown
 	 * example:[Ngxcache::rebuild($uri,true,false);]
 	 *
 	 * @param  string  $uri
-	 * @param  string  $overwrite
-	 * @param  string  $usecurl
+	 * @param  bool    $overwrite
+	 * @param  bool    $usecurl
 	 * @return result
 	 */
-	Ngxcache::rebuild($uri,$overwrite=false,$usecurl=false)
+	Ngxcache::rebuild($uri,$overwrite=false,$usecurl=false,$cached_only=false)
 	(Second argument will do the forcibly overwritten.
 	 　　Only if the cache does not exist , the cache is created normally.
 	 	Third argument is curl or file_get_contents)
@@ -175,8 +176,40 @@ Usually are not cached .  You can select the page to be cached by that, as shown
 
 ## Trouble shooting
 
+### open_basedir restriction in effect.
+
 Add the cache directory of Nginx　to `open_basedir` in the `php.ini` If the operation of the cache does not work if.
 
 	(Example)
 	open_basedir = .:/usr/share/php:/usr/share/pear:/var/run/nginx-cache
+
+### If the cache does not match at Homestead environment
+Measures There are two .
+
+#### Pattern A
+Run `vagrant ssh` after `sudo vim /etc/nginx/sites-available/homestead.app`
+
+	server {
+	-	listen 80;
+	+	listen 8000;
+
+After run `exit` command.
+
+Next step => edit `scripts/homestead.rb`
+
+	# Configure Port Forwarding To The Box
+	- config.vm.network "forwarded_port", guest: 80, host: 8000
+	+ config.vm.network "forwarded_port", guest: 8000, host: 8000
+
+Please try to run the `vagrant reload` when finished.
+
+#### Pattern B
+Run `vagrant ssh` after `sudo vim /etc/nginx/sites-available/homestead.app`
+
+	server {
+		listen 80;
+	+	listen 8000;
+
+Please try to run the `sudo service nginx reload` when finished.
+
 
