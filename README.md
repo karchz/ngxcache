@@ -157,6 +157,7 @@ Usually are not cached .  You can select the page to be cached by that, as shown
 	 * @param  string  $uri
 	 * @param  bool    $overwrite
 	 * @param  bool    $usecurl
+	 * @param  bool    $cached_only
 	 * @return result
 	 */
 	Ngxcache::rebuild($uri,$overwrite=false,$usecurl=false,$cached_only=false)
