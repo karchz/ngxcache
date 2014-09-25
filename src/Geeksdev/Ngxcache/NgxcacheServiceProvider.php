@@ -64,13 +64,19 @@ class NgxcacheServiceProvider extends ServiceProvider
 			return new Commands\RefreshAllCommand();
 		});
 
+		$this->app['ngxcache.backtrace'] = $this->app->share(function($app)
+		{
+			return new Commands\BacktraceCommand();
+		});
+
 		$this->commands(
 			'ngxcache.search',
 			'ngxcache.show',
 			'ngxcache.purge',
 			'ngxcache.purge-all',
 			'ngxcache.rebuild',
-			'ngxcache.refresh-all'
+			'ngxcache.refresh-all',
+			'ngxcache.backtrace'
 		);
 
 	}

@@ -199,11 +199,12 @@ class Ngxcache
 	 * Rebuild Nginx cache.
 	 *
 	 * @param  string  $uri
-	 * @param  string  $overwrite
-	 * @param  string  $usecurl
+	 * @param  bool    $overwrite
+	 * @param  bool    $usecurl
+	 * @param  bool    $cached_only
 	 * @return result
 	 */
-	public function rebuild($uri,$overwrite=false,$usecurl=false)
+	public function rebuild($uri,$overwrite=false,$usecurl=false,$cached_only=false)
 	{
 		$result = new \stdClass();
 		
@@ -212,7 +213,13 @@ class Ngxcache
 			$overwrite = false;
 		}
 		$info = $this->purge($uri,!$overwrite);
-
+		
+		$result->cache = $info->cache;
+		if($cached_only && !$info->success){
+			$result->success = false;
+			$result->status = 'skip';
+			return $result;
+		}
 		if(!$info->success || ($info->success && $overwrite)){
 
 			if($usecurl){
@@ -221,18 +228,17 @@ class Ngxcache
 				file_get_contents($uri);
 			}
 
-			$result = $this->purge($uri,true);
-			if($result->success){
+			if(file_exists($info->cache)){
 				$result->status = 'cached';
 			}else{
 				$result->status = 'notfound';
 			}
+
 		}else{
 			$result = $info;
 			$result->success = false;
 			$result->status = 'exist';
 		}
-
 		return $result;
 	}
 

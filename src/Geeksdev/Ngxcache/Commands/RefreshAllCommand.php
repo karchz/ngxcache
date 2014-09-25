@@ -43,7 +43,7 @@ class RefreshAllCommand extends Command {
 						$this->error('Writing error.');
 					}
 				}else{
-					$this->error("Sourse uri is unknown.");
+					$this->error("Source uri is unknown.");
 				}
 			}
 		}
